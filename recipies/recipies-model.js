@@ -1,14 +1,22 @@
+const { outerJoin } = require("../database/dbConfig")
 const db = require("../database/dbConfig")
 
-function getAll() {
-	return db("recipe as r")
+async function getAll() {
+	const recipe = await db("recipe as r")
 		.innerJoin("users as u", "u.id", "r.sourceId")
-		.select("r.id", "r.title", "u.username as source")
+		//.innerJoin("ingredients as i", "i.recipeId", "r.id")
+		.select("r.id", "r.title", "u.username as source", "r.instructions") 
 
-	//console.log(recipe)	
+
+	const ingredients = await db("ingredients as i").select("i.description").where("recipeId", recipe.id)
+
+	const finallRecipe = {...recipe, ...ingredients}
+
+
+	return recipe
 }
 
-function findIngredients(id){
+function findIngredients(id) {
 	return db("ingredients")
 		.where("recipeId", id)
 }
@@ -39,8 +47,8 @@ function remove(id) {
 
 module.exports = {
 	getAll,
-    findById,
-    findByRecipiname,
+	findById,
+	findByRecipiname,
 	create,
 	update,
 	remove,

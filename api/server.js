@@ -14,6 +14,6 @@ server.use(express.json());
 server.use(cookieParser())
 
 server.use('/api/auth', authRouter);
-server.use('/api/recipies',  restrict(), recipeRouter);
+server.use('/api/recipies', recipeRouter);
 
 module.exports = server;
