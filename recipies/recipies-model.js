@@ -1,6 +1,6 @@
 const db = require("../database/dbConfig")
 
-function find() {
+function getAll() {
 	return db("recipe as r")
 		.innerJoin("users as u", "u.id", "r.sourceId")
 		.select("r.id", "r.title", "u.username")
@@ -38,7 +38,7 @@ function remove(id) {
 }
 
 module.exports = {
-	find,
+	getAll,
     findById,
     findByRecipiname,
 	create,

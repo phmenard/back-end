@@ -7,7 +7,7 @@ const Recipies = require("./recipies-model");
 
 router.get("/", async (req, res, next) => {
 	try {
-		res.json(await Recipies.find())
+		res.json(await Recipies.getAll())
 	} catch(err) {
 		next(err)
 	}
