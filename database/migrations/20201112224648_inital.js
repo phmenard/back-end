@@ -21,7 +21,7 @@ exports.up = function (knex) {
         .createTable('category', category =>{
             category.increments();
             category.string('name').notNullable().unique();
-            category.integer('recipieId').unsigned().notNullable()
+            category.integer('recipeId').unsigned().notNullable()
                 .references('id')
                 .inTable('recipe');
         })
@@ -29,7 +29,7 @@ exports.up = function (knex) {
         .createTable('ingredients', ingredients => {
             ingredients.increments();
             ingredients.string('description').notNullable();
-            ingredients.integer('recipieId').unsigned().notNullable()
+            ingredients.integer('recipeId').unsigned().notNullable()
                 .references('id')
                 .inTable('recipe');
         });
@@ -40,6 +40,8 @@ exports.up = function (knex) {
 exports.down = function (knex, Promise) {
     return knex.schema
          .dropTableIfExists('users')
-         .dropTableIfExists('recipie');
+         .dropTableIfExists('recipe')
+         .dropTableIfExists('category')
+         .dropTableIfExists('ingredients');
 };
 
