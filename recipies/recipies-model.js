@@ -1,7 +1,16 @@
 const db = require("../database/dbConfig")
 
 function find() {
-	return db("recipies")
+	return db("recipe as r")
+		.innerJoin("users as u", "u.id", "r.sourceId")
+		.select("r.id", "r.title", "u.username")
+
+	//console.log(recipe)	
+}
+
+function findIngredients(id){
+	return db("ingredients")
+		.where("recipeId", id)
 }
 
 function findById(id) {
@@ -35,4 +44,5 @@ module.exports = {
 	create,
 	update,
 	remove,
+	findIngredients,
 }
