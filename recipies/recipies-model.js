@@ -3,7 +3,7 @@ const db = require("../database/dbConfig")
 function getAll() {
 	return db("recipe as r")
 		.innerJoin("users as u", "u.id", "r.sourceId")
-		.select("r.id", "r.title", "u.username")
+		.select("r.id", "r.title", "u.username as source")
 
 	//console.log(recipe)	
 }
