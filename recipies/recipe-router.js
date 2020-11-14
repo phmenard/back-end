@@ -25,6 +25,7 @@ router.get("/", async (req, res, next) => {
 	}
 })
 
+// only a user logged in can add a new recipe
 router.post("/recipies", restrict(), async (req, res, next) => {
 	const recipe = req.body
 	const newRecipe = await Recipies.addNewRecipe(recipe)
