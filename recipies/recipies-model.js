@@ -25,13 +25,13 @@ async function getAll() {
 async function findIngredients(id) {
 	return await db("ingredients")
 		.where("recipeId", id)
-		.select("description")
+		.select("description") // all we want is the description
 }
 
 async function findCategories(id) {
 	return await db("category")
 		.where("recipeId", id)
-		.select("name")
+		.select("name") // all we want is the name
 }
 
 function findById(id) {
