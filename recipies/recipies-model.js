@@ -6,11 +6,8 @@ async function getAll() {
 		.innerJoin("users as u", "u.id", "r.sourceId")
 		.select("r.id", "r.title", "u.username as source", "r.instructions")
 
-	console.log(recipies.length)
-	// if no recipies dont try looping	
+	// if there are recipies loop through them	
 	if (recipies) {
-
-
 		var r = 0;
 		// loop over all the recipies, this seems way to inefficient. Has to be a way
 		// to work this into a few joins what if I had a million recipies
@@ -25,9 +22,7 @@ async function getAll() {
 
 			r++;
 
-
 		} while (r <= recipies.length - 1)
-
 
 	}
 
@@ -102,12 +97,12 @@ async function addCategories(id, data) {
 		console.log(category)
 
 		//if (!findCategoryByName(category)) {
-			const cat = {
-				recipeId: id,
-				name: category.name
-			}
+		const cat = {
+			recipeId: id,
+			name: category.name
+		}
 
-			const [c] = await db("category").insert(cat)
+		const [c] = await db("category").insert(cat)
 		//}
 	});
 }
