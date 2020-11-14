@@ -3,7 +3,7 @@ const db = require("../database/dbConfig")
 async function getAllRecipies() {
 	const recipies = await db("recipe as r")
 		.innerJoin("users as u", "u.id", "r.sourceId")
-		.select("r.id", "r.title", "u.username as source")
+		.select("r.id", "r.image", "r.title", "u.username as source")
 
 		return recipies;
 }
