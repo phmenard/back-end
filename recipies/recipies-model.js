@@ -8,18 +8,16 @@ async function getAll() {
 
 	// if no recipies do try looping	
 	if (recipies) {
-		// now find all the ingredients for each recipe using a helper function	
+		// loop over all the recipies, this seems why to inefficient. Has to be a way
+		// to work this into a few joins	
 		for (r = 0; r < recipies.length; r++) {
+			// now find all the ingredients for each recipe using a helper function
 			const ingredients = await findIngredients(recipies[r].id)
 			recipies[r]['ingredients'] = ingredients // add the ingredient to the recipe
 
-		}
-
-		// now find all the categories for each recipe using a helper function	
-		for (r = 0; r < recipies.length; r++) {
+			// now find all the categories for each recipe using a helper function
 			const categories = await findCategories(recipies[r].id)
 			recipies[r]['categories'] = categories // add the category to the recipe
-
 		}
 	}
 
