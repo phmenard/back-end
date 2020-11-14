@@ -6,7 +6,7 @@ async function getAll() {
 		.innerJoin("users as u", "u.id", "r.sourceId")
 		.select("r.id", "r.title", "u.username as source", "r.instructions")
 
-	// if no recipies do try looping	
+	// if no recipies dont try looping	
 	if (recipies) {
 		// loop over all the recipies, this seems why to inefficient. Has to be a way
 		// to work this into a few joins what if I had a million recipies	
