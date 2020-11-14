@@ -12,6 +12,8 @@ async function getAll() {
 
 
 		var r = 0;
+		// loop over all the recipies, this seems way to inefficient. Has to be a way
+		// to work this into a few joins what if I had a million recipies
 		do {
 			console.log(r)
 			const ingredients = await findIngredients(recipies[r].id)
