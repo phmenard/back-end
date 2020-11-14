@@ -35,7 +35,7 @@ async function getAll() {
 async function findIngredients(id) {
 	return await db("ingredients")
 		.where("recipeId", id)
-		.select("description") // all we want is the description
+		.select("name") // all we want is the description
 }
 
 async function findCategories(id) {
