@@ -1,12 +1,12 @@
 const router = require('express').Router();
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
-const Users = require("../recipies/recipies-model")
+const Users = require("../auth/users-model")
 
 router.post('/signup',  async (req, res, next) => {
   // impliment register
   try {
-		const { username, password } = req.body
+		const { username, email, password } = req.body
 		const user = await Users.findByUsername(username)
 
 		if (user) {
@@ -16,7 +16,8 @@ router.post('/signup',  async (req, res, next) => {
 		}
 
 		const newUser = await Users.create({
-			username,
+      username,
+      email,
 			// hash the password with a time complexity of "14"
 			password: await bcrypt.hash(password, 14),
 		})
