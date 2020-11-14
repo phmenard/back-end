@@ -1,24 +1,27 @@
 const db = require("../database/dbConfig")
 
 async function getAll() {
+	// get all the recipies first
 	const recipies = await db("recipe as r")
 		.innerJoin("users as u", "u.id", "r.sourceId")
 		.select("r.id", "r.title", "u.username as source", "r.instructions")
 
-	// find all the ingredients for each recipe using a helper function	
-	for(r = 0; r < recipies.length ; r++){
-		const ingredients = await findIngredients(recipies[r].id)
-		recipies[r]['ingredients'] = ingredients
-		
-	}	
+	if (recipies) {
+		// now find all the ingredients for each recipe using a helper function	
+		for (r = 0; r < recipies.length; r++) {
+			const ingredients = await findIngredients(recipies[r].id)
+			recipies[r]['ingredients'] = ingredients
 
-	// find all the categories for each recipe using a helper function	
-	for(r = 0; r < recipies.length; r++){
-		const categories = await findCategories(recipies[r].id)
-		recipies[r]['categories'] = categories
-		
-	}	
-	
+		}
+
+		// now find all the categories for each recipe using a helper function	
+		for (r = 0; r < recipies.length; r++) {
+			const categories = await findCategories(recipies[r].id)
+			recipies[r]['categories'] = categories
+
+		}
+	}
+
 	return recipies;
 }
 
@@ -70,32 +73,32 @@ module.exports = {
 }
 
 //console.log(recipies)
-	
-	/*recipies.forEach(async recipe =>  {
-		const ingredients = await findIngredients(recipe.id)
-		recipe['ingredients'] = ingredients
-		//console.log(recipe)
-	});
 
-	recipies.forEach(async recipe =>  {
-		const categories = await findIngredients(recipe.id)
-		recipe['categories'] = categories
+/*recipies.forEach(async recipe =>  {
+	const ingredients = await findIngredients(recipe.id)
+	recipe['ingredients'] = ingredients
+	//console.log(recipe)
+});
 
-		console.log(recipe)
-	});*/
+recipies.forEach(async recipe =>  {
+	const categories = await findIngredients(recipe.id)
+	recipe['categories'] = categories
 
-	
-	/*const ingredients = await db('ingredients as i')
-		//.join('ingredients', 'ingredients.recipeId', 'r.id')
-		.select("i.description")
-		.where('i.recipeId', recipies.id)*/
+	console.log(recipe)
+});*/
 
-	/*const categories = await db('category as c')
-		//.join('ingredients', 'ingredients.recipeId', 'r.id')
-		.select("c.name")
-		.where('c.recipeId', recipies.id)*/
 
-	
+/*const ingredients = await db('ingredients as i')
+	//.join('ingredients', 'ingredients.recipeId', 'r.id')
+	.select("i.description")
+	.where('i.recipeId', recipies.id)*/
+
+/*const categories = await db('category as c')
+	//.join('ingredients', 'ingredients.recipeId', 'r.id')
+	.select("c.name")
+	.where('c.recipeId', recipies.id)*/
+
+
 	//recipies['ingredients'] = ingredients;
 
 	//recipies['ingredients'] = ingredients;
