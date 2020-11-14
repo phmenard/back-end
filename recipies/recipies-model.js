@@ -20,7 +20,7 @@ async function getAll() {
 			const categories = await findCategories(recipies[r].id)
 			recipies[r]['categories'] = categories // add the category to the recipe
 
-			r++;
+			r++; // increment the recipe
 
 		} while (r <= recipies.length - 1)
 
