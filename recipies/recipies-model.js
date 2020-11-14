@@ -11,14 +11,14 @@ async function getAll() {
 		// now find all the ingredients for each recipe using a helper function	
 		for (r = 0; r < recipies.length; r++) {
 			const ingredients = await findIngredients(recipies[r].id)
-			recipies[r]['ingredients'] = ingredients
+			recipies[r]['ingredients'] = ingredients // add the ingredient to the recipe
 
 		}
 
 		// now find all the categories for each recipe using a helper function	
 		for (r = 0; r < recipies.length; r++) {
 			const categories = await findCategories(recipies[r].id)
-			recipies[r]['categories'] = categories
+			recipies[r]['categories'] = categories // add the category to the recipe
 
 		}
 	}
