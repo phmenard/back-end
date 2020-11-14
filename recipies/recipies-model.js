@@ -6,6 +6,7 @@ async function getAll() {
 		.innerJoin("users as u", "u.id", "r.sourceId")
 		.select("r.id", "r.title", "u.username as source", "r.instructions")
 
+	// if no recipies do try looping	
 	if (recipies) {
 		// now find all the ingredients for each recipe using a helper function	
 		for (r = 0; r < recipies.length; r++) {
