@@ -5,7 +5,7 @@ function find() {
 }
 
 function findById(id) {
-	return db("users").where({ id }).first()
+	return db("users").where({ id }).first().select("id", "username")
 }
 
 function findByUsername(username) {
