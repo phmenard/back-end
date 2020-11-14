@@ -1,23 +1,53 @@
-const { outerJoin } = require("../database/dbConfig")
 const db = require("../database/dbConfig")
 
 async function getAll() {
-	const recipe = await db("recipe as r")
+	const recipies = await db("recipe as r")
 		.innerJoin("users as u", "u.id", "r.sourceId")
-		//.innerJoin("ingredients as i", "i.recipeId", "r.id")
-		.select("r.id", "r.title", "u.username as source", "r.instructions") 
+		.select("r.id", "r.title", "u.username as source", "r.instructions")
+		
+	
+	recipies.forEach(async recipe =>  {
+		const ingredients = await findIngredients(recipe.id)
+		recipe['ingredients'] = ingredients
+		//console.log(recipe)
+	});
+
+	recipies.forEach(async recipe =>  {
+		const categories = await findIngredients(recipe.id)
+		recipe['categories'] = categories
+
+		console.log(recipe)
+	});
+
+	
+
+	
+	/*const ingredients = await db('ingredients as i')
+		//.join('ingredients', 'ingredients.recipeId', 'r.id')
+		.select("i.description")
+		.where('i.recipeId', recipies.id)*/
+
+	/*const categories = await db('category as c')
+		//.join('ingredients', 'ingredients.recipeId', 'r.id')
+		.select("c.name")
+		.where('c.recipeId', recipies.id)*/
+
+	
+	//recipies['ingredients'] = ingredients;
+
+	//recipies['ingredients'] = ingredients;
 
 
-	const ingredients = await db("ingredients as i").select("i.description").where("recipeId", recipe.id)
-
-	const finallRecipe = {...recipe, ...ingredients}
-
-
-	return recipe
+	return recipies;
 }
 
-function findIngredients(id) {
-	return db("ingredients")
+async function findIngredients(id) {
+	return await db("ingredients")
+		.where("recipeId", id)
+}
+
+async function findCategories(id) {
+	return await db("ingredients")
 		.where("recipeId", id)
 }
 
@@ -53,4 +83,5 @@ module.exports = {
 	update,
 	remove,
 	findIngredients,
+	findCategories
 }
