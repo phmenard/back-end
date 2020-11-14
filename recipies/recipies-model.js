@@ -83,7 +83,7 @@ async function addIngredients(id, data) {
 
 		const ingr = {
 			recipeId: id,
-			description: ingredient.description
+			name: ingredient.name
 		}
 
 		const [ing] = await db("ingredients").insert(ingr)
