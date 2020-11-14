@@ -20,7 +20,7 @@ exports.up = function (knex) {
         
         .createTable('category', category =>{
             category.increments();
-            category.string('name').notNullable().unique();
+            category.string('name').notNullable();
             category.integer('recipeId').unsigned().notNullable()
                 .references('id')
                 .inTable('recipe');
