@@ -145,13 +145,10 @@ function remove(id) {
 }
 
 module.exports = {
-	getAll,
 	findById,
 	findByRecipiname,
 	update,
 	remove,
-	findIngredients,
-	findCategories,
 	addNewRecipe,
 	getAllRecipies
 }
