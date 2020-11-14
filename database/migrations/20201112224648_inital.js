@@ -8,7 +8,7 @@ exports.up = function (knex) {
         })
 
         .createTable('recipe', recipie => {
-            recipie.increments();
+            recipie.increments()
             recipie.string('title', 255).notNullable().unique();
             
             recipie.integer('sourceId').unsigned().notNullable()
