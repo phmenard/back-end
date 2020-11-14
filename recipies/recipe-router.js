@@ -25,4 +25,11 @@ router.get("/", async (req, res, next) => {
 	}
 })
 
+router.post("/recipies", restrict(), async (req, res, next) => {
+	const recipe = req.body
+	const newRecipe = await Recipies.addNewRecipe(recipe)
+
+	res.status(201).json(newRecipe)
+})
+
 module.exports = router;
